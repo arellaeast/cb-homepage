@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* Captain Baltimore — sitewide brand layer.
+   Same energy as the new homepage: ink borders, hard shadows, neon accents,
+   Poppins display type. Deliberately conservative: theme colors stay, the
+   cartoon treatment goes on top. */
+
+:root {
+    --cb-ink: #111111;
+    --cb-paper: #fffdf4;
+    --cb-pink: #ff2e88;
+    --cb-purple: #7b2fff;
+    --cb-cyan: #00c2e8;
+    --cb-lime: #7ed321;
+    --cb-yellow: #ffd500;
+}
+
+::selection {
+    background: var(--cb-yellow);
+    color: var(--cb-ink);
+}
+
+/* Display type everywhere */
+h1, h2, h3,
+.woocommerce-loop-product__title,
+.tribe-events-single-event-title {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: .01em;
+}
+
+/* Header + footer get the ink rule line */
+.site-header {
+    border-bottom: 3px solid var(--cb-ink);
+}
+#site-footer, .site-footer {
+    border-top: 3px solid var(--cb-ink);
+}
+
+/* Buttons: chunky, bordered, hard shadow — theme colors untouched */
+.button,
+button.button,
+input[type="submit"],
+input[type="button"],
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit,
+.wp-block-button__link,
+.tribe-common a.tribe-common-c-btn,
+.tribe-common button.tribe-common-c-btn {
+    border: 2.5px solid var(--cb-ink) !important;
+    border-radius: 10px !important;
+    box-shadow: 3px 3px 0 var(--cb-ink);
+    font-weight: 700;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.button:hover,
+button.button:hover,
+input[type="submit"]:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.wp-block-button__link:hover,
+.tribe-common a.tribe-common-c-btn:hover,
+.tribe-common button.tribe-common-c-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--cb-ink);
+}
+
+/* Shop product cards become sticker cards */
+.woocommerce ul.products li.product {
+    background: #ffffff;
+    border: 3px solid var(--cb-ink);
+    border-radius: 0;
+    box-shadow: 5px 5px 0 rgba(17, 17, 17, .9);
+    overflow: hidden;
+    padding-bottom: 14px;
+}
+.woocommerce ul.products li.product a img {
+    border-bottom: 3px solid var(--cb-ink);
+    border-radius: 0;
+    margin-bottom: 12px;
+}
+.woocommerce ul.products li.product .woocommerce-loop-product__title,
+.woocommerce ul.products li.product .price {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.woocommerce ul.products li.product .price {
+    font-weight: 700;
+    color: var(--cb-ink);
+}
+
+/* Single product image gets the frame too */
+.woocommerce div.product div.images img {
+    border: 3px solid var(--cb-ink);
+    border-radius: 0;
+}
+
+/* Events list: each event becomes a card */
+.tribe-events .tribe-events-calendar-list__event {
+    background: #ffffff;
+    border: 3px solid var(--cb-ink);
+    border-radius: 0;
+    box-shadow: 5px 5px 0 rgba(17, 17, 17, .9);
+    padding: 18px;
+    margin-bottom: 22px;
+}
+.tribe-events .tribe-events-calendar-list__event-featured-image {
+    border: 2.5px solid var(--cb-ink);
+    border-radius: 0;
+}
+
+/* Sale badge pops in brand pink */
+.woocommerce span.onsale {
+    background: var(--cb-pink);
+    border: 2px solid var(--cb-ink);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* ── Pirate Radio tuner re-skin (cb-pirate-radio plugin) ─────────────
+   The tuner is variable-driven: remap its skin to the brand palette and
+   layer the hard-shadow card treatment on top. Variables carry !important
+   so the plugin's inline defaults can't win. Playback, presets, voting,
+   and charts behavior are untouched. */
+body .cb-tuner,
+body .cb-charts {
+    --cb-hull: #fffdf4 !important;
+    --cb-panel: #ffffff !important;
+    --cb-brass: #7b2fff !important;
+    --cb-signal: #ff2e88 !important;
+    --cb-ink: #111111 !important;
+    --cb-ink-dim: #5c5c55 !important;
+    --cb-border: #111111 !important;
+    --cb-bw: 3px !important;
+    --cb-radius: 0 !important;
+    --cb-radius-sm: 0 !important;
+    --cb-hover: .5 !important;
+    --cb-font: 'Poppins', Arial, sans-serif !important;
+    box-shadow: 7px 7px 0 #111111;
+}
+.cb-tuner .cb-tuner__unit { background: #ffffff; }
+.cb-tuner .cb-tuner__digits {
+    color: #111111;
+    text-shadow: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+}
+.cb-tuner .cb-tuner__callsign,
+.cb-tuner .cb-tuner__display-label,
+.cb-charts .cb-charts__title {
+    font-family: 'Poppins', sans-serif;
+}
+.cb-tuner .cb-tuner__play {
+    background: #ffd500;
+    border: 3px solid #111111;
+    color: #111111;
+    box-shadow: 4px 4px 0 #111111;
+}
+.cb-tuner .cb-tuner__play.is-playing {
+    background: #ff2e88;
+    color: #ffffff;
+}
+.cb-tuner .cb-tuner__preset.is-tuned {
+    background: #ffd500;
+    box-shadow: 3px 3px 0 #111111;
+}
+.cb-tuner #cb-volume { accent-color: #ff2e88; }
+
+/* Footer join band ([cb_join]) — the yellow newsletter block, sitewide.
+   Form rules mirror the locked 54px input/button alignment from cb-home.css. */
+.cb-joinband { background: #FFD500; color: #111111; text-align: center; padding: 34px 20px 30px; border-top: 3px solid #111111; border-bottom: 3px solid #111111; font-family: 'Poppins', sans-serif; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); box-sizing: border-box; }
+.cb-joinband__kicker { margin: 0 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: #FF2E88; }
+.cb-joinband__title { margin: 0 0 14px; font-size: 30px; font-weight: 800; line-height: 1.15; color: #111111; font-family: 'Poppins', sans-serif; }
+.cb-joinband__btn { display: inline-block; margin: 0 0 20px; padding: 10px 18px; border: 3px solid #111111; background: transparent; color: #111111 !important; font-weight: 700; text-decoration: none; box-shadow: 3px 3px 0 #111111; }
+.cb-joinband__btn:hover { background: #111111; color: #FFD500 !important; }
+.cb-joinband .cb-home-sub { display: flex; gap: 0; max-width: 520px; margin: 0 auto; align-items: stretch; text-align: left; }
+.cb-joinband .cb-home-sub__input { flex: 1 1 auto; min-width: 0; border: 3px solid #111111; border-right: none; border-radius: 0; height: 54px; min-height: 54px; max-height: 54px; padding: 0 16px; line-height: 1.2; box-sizing: border-box; font-size: 16px; background: #fff; color: #111111; }
+.cb-joinband .cb-home-sub__btn { flex: none; border: 3px solid #111111; border-radius: 0; background: #111111; color: #fff !important; font-weight: 700; height: 54px; min-height: 54px; max-height: 54px; padding: 0 22px; line-height: 1.2; box-sizing: border-box; cursor: pointer; }
+.cb-joinband .cb-home-sub__btn:hover { background: #FF2E88; }
+.cb-joinband .cb-home-sub__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.cb-joinband .cb-home-sub__msg { display: none; font-weight: 700; margin: 10px 0 0; }
+.cb-joinband .cb-home-sub__msg.is-visible { display: block; }
+.cb-joinband .cb-home-note { font-size: 15px; margin: 0; }
+.cb-joinband .cb-home-note a { color: #7B2FFF; font-weight: 700; }
+@media (max-width: 560px) {
+    .cb-joinband .cb-home-sub { flex-direction: column; }
+    .cb-joinband .cb-home-sub__input { border-right: 3px solid #111111; border-bottom: none; }
+    .cb-joinband__title { font-size: 24px; }
+}
+
+/* Footer band full-bleed (Jacob, 2026-10-23: "expands the whole way"):
+   release the theme's row/column constraints around the footer widget area
+   so the yellow band runs edge to edge. */
+.site-footer-widget-area { padding-left: 0 !important; padding-right: 0 !important; }
+.site-footer-widget-area .row { max-width: none !important; width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
+.site-footer-widget-area .columns { padding-left: 0 !important; padding-right: 0 !important; float: none !important; }
+.site-footer-widget-area aside.widget { margin-bottom: 0 !important; }
+
+/* Form row hard-pinning (v1.2.10): on Jacob's laptop the theme stacked the
+   button under the field despite the flex rules — lock the row layout down
+   with !important so no theme rule can break it up. */
+.cb-joinband .cb-home-sub { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; align-items: stretch !important; gap: 0 !important; }
+.cb-joinband .cb-home-sub__input { flex: 1 1 auto !important; width: auto !important; min-width: 0 !important; float: none !important; }
+.cb-joinband .cb-home-sub__btn { flex: 0 0 auto !important; width: auto !important; float: none !important; }
+@media (max-width: 560px) {
+    .cb-joinband .cb-home-sub { flex-direction: column !important; }
+    .cb-joinband .cb-home-sub__btn { width: 100% !important; }
+}
+
+/* All-caps page titles sitewide, matching the RADIO page (v1.2.11; !important added v1.2.12 — the theme overrode the plain rule) */
+.page-title { text-transform: uppercase !important; }
