@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.13
+ * Version: 1.2.14
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.13' );
+define( 'CB_HOME_VERSION', '1.2.14' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -346,6 +346,12 @@ add_shortcode( 'cb_home', function () {
                         <span class="cb-hd-track" data-track>—</span>
                         <span class="cb-hd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
                     </button>
+                    <button type="button" class="cb-hd-card" data-slug="dock-talk" style="--acc:#FFD500" aria-pressed="false">
+                        <span class="cb-hd-freq">94.10<small> FM</small></span>
+                        <span class="cb-hd-name">Dock Talk</span>
+                        <span class="cb-hd-track" data-track>—</span>
+                        <span class="cb-hd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                    </button>
                 </div>
                 <div class="cb-hd-main">
                     <div class="cb-hd-artwrap"><img data-art alt="" hidden><span class="cb-hd-artfb" data-artfb>&#127988;&#8205;&#9760;&#65039;</span></div>
@@ -375,7 +381,8 @@ add_shortcode( 'cb_home', function () {
                 var CHANNELS = [
                     { slug: 'drill', stream: 'https://radio.captainbaltimore.com/listen/local_baltimore_hip_hop_and_rb/radio.mp3' },
                     { slug: 'hip-hop-and-r-and-b', stream: 'https://radio.captainbaltimore.com/listen/local_baltimore_hip_hop_and_rb/radio.mp3' },
-                    { slug: 'bmore-club2', stream: 'https://radio.captainbaltimore.com/listen/captainbaltimore/radio.mp3' }
+                    { slug: 'bmore-club2', stream: 'https://radio.captainbaltimore.com/listen/captainbaltimore/radio.mp3' },
+                    { slug: 'dock-talk', stream: 'https://radio.captainbaltimore.com/listen/dock_talk/radio.mp3' }
                 ];
                 var ICON_PLAY = '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg>';
                 var ICON_PAUSE = '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>';
