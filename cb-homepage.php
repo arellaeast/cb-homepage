@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.14
+ * Version: 1.2.15
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.14' );
+define( 'CB_HOME_VERSION', '1.2.15' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -409,6 +409,7 @@ add_shortcode( 'cb_home', function () {
                     playBtn.classList.toggle('is-playing', state.playing);
                     root.classList.toggle('is-playing', state.playing);
                     root.querySelectorAll('.cb-hd-card').forEach(function(c){ c.classList.toggle('is-sounding', state.playing && c.dataset.slug === state.slug); });
+                    syncMediaSession();
                 }
                 function loadPlay(){
                     var url = streamFor(state.slug); if (!url) return;
@@ -437,6 +438,72 @@ add_shortcode( 'cb_home', function () {
                 q('[data-next]').addEventListener('click', function(){ tune(CHANNELS[(idx(state.slug) + 1) % CHANNELS.length].slug, state.playing); });
                 q('[data-volume]').addEventListener('input', function(){ audio.volume = parseFloat(this.value); audio.muted = false; lsSet('cbdVolume', audio.volume); lsSet('cbdMuted', null); paintMute(); });
                 q('[data-mute]').addEventListener('click', function(){ audio.muted = !audio.muted; lsSet('cbdMuted', audio.muted ? '1' : null); paintMute(); });
+                /* ---------- media session (lock screen / OS media controls) ---------- */
+                // v1.2.15: the same lock-screen feed the full deck got in
+                // cb-radio-deck v1.1.15. syncMediaSession() is called from
+                // paintPlay() (play/pause flips) and render() (every poll /
+                // retune), and reads state.data[state.slug] for the tuned
+                // — i.e. playing — channel. The album text comes from the
+                // tuned card itself, so it always matches what the homepage
+                // shows. Fully feature-detected and exception-proof: a
+                // browser without the API just skips all of this.
+                var MS = ('mediaSession' in navigator) ? navigator.mediaSession : null;
+                var msEngaged = false, msKey = '';
+                function syncMediaSession(){
+                    if (!MS) return;
+                    try {
+                        if (state.playing) {
+                            var d = state.data[state.slug];
+                            if (d) {
+                                var card = cards[state.slug];
+                                var freqTxt = '', nameTxt = '';
+                                if (card) {
+                                    var fEl = card.querySelector('.cb-hd-freq'), nEl = card.querySelector('.cb-hd-name');
+                                    if (fEl) freqTxt = fEl.textContent.replace(/\s+/g, ' ').trim();
+                                    if (nEl) nameTxt = nEl.textContent.replace(/\s+/g, ' ').trim();
+                                }
+                                var msTitle = (d.song && d.song.title) || '';
+                                var msArtist = (d.artist && d.artist.name) || (d.song && d.song.artist) || '';
+                                var msArt = (d.song && d.song.art) || (d.artist && d.artist.photo) || '';
+                                var key = state.slug + '|' + msTitle + '|' + msArtist + '|' + msArt;
+                                if (key !== msKey && typeof MediaMetadata !== 'undefined') {
+                                    msKey = key;
+                                    var md = {
+                                        title: msTitle || 'Pirate Radio',
+                                        artist: msArtist || 'Captain Baltimore',
+                                        album: (freqTxt + (nameTxt ? ' · ' + nameTxt : '')).trim()
+                                    };
+                                    if (msArt) {
+                                        md.artwork = [96, 128, 192, 256, 384, 512].map(function(s){ return { src: msArt, sizes: s + 'x' + s }; });
+                                    }
+                                    MS.metadata = new MediaMetadata(md);
+                                }
+                                msEngaged = true;
+                            }
+                            MS.playbackState = 'playing';
+                        } else if (msEngaged) {
+                            // The mini deck's stop tears the stream down
+                            // (stop()), so a pause here is a true stop:
+                            // clear the lock-screen entry.
+                            msEngaged = false;
+                            msKey = '';
+                            try { MS.metadata = null; } catch(e){}
+                            MS.playbackState = 'none';
+                        }
+                    } catch(e){ /* media session must never break playback */ }
+                }
+                if (MS) {
+                    var msHandlers = {
+                        play: function(){ if (!state.playing) loadPlay(); },
+                        pause: function(){ if (state.playing) stop(); },
+                        stop: function(){ if (state.playing) stop(); },
+                        previoustrack: function(){ tune(CHANNELS[(idx(state.slug) + CHANNELS.length - 1) % CHANNELS.length].slug, state.playing); },
+                        nexttrack: function(){ tune(CHANNELS[(idx(state.slug) + 1) % CHANNELS.length].slug, state.playing); }
+                    };
+                    Object.keys(msHandlers).forEach(function(a){
+                        try { MS.setActionHandler(a, msHandlers[a]); } catch(e){}
+                    });
+                }
                 function render(){
                     CHANNELS.forEach(function(ch){
                         var d = state.data[ch.slug], el = cards[ch.slug];
@@ -452,6 +519,7 @@ add_shortcode( 'cb_home', function () {
                     if (art) { img.src = art; img.hidden = false; q('[data-artfb]').style.display = 'none'; }
                     else { img.hidden = true; q('[data-artfb]').style.display = ''; }
                     tick();
+                    syncMediaSession();
                 }
                 function tick(){
                     var d = state.data[state.slug];
