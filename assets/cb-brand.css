@@ -211,3 +211,16 @@ body .cb-charts {
 
 /* All-caps page titles sitewide, matching the RADIO page (v1.2.11; !important added v1.2.12 — the theme overrode the plain rule) */
 .page-title { text-transform: uppercase !important; }
+
+/* Shop price filter button: was a bare orange right-floated label inside an outline pill (Jacob: "looks kind of wonky", 2026-11-12). Make it a proper brand button like JOIN THE FUN. */
+.woocommerce .widget.widget_price_filter .price_slider_amount .button {
+    float: none !important;
+    display: inline-block;
+    padding: 10px 22px !important;
+    background: #111111 !important;
+    color: #ffffff !important;
+    border-radius: 0 !important;
+    text-align: center !important;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
