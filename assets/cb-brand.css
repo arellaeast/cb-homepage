@@ -463,3 +463,23 @@ body.single-post .single-post-header-bkg {
 body.single-post .single-post-header .row > div {
     flex: 0 0 100% !important;
 }
+
+/* Post page mobile fixes (Jacob, 2026-11-12): the theme pulls the post header up -85px (title slid under the site header) and leaves a 90px margin under it (dead space before the article) */
+body.single-post .single-post-header {
+    margin-bottom: 18px !important;
+}
+body.single-post .single-post-header .post_meta {
+    line-height: 1.35 !important;
+}
+body.single-post .single-post-header .post_meta a {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+@media (max-width: 1024px) {
+    body.single-post .single-post-header {
+        margin-top: 0 !important;
+    }
+    body.single-post .single-post-header-bkg {
+        margin-top: 12px !important;
+    }
+}
