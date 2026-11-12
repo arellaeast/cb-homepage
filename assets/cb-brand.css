@@ -240,6 +240,7 @@ body .cb-charts {
 }
 .woocommerce ul.products li.product .product_after_shop_loop_switcher a.button {
     display: block !important;
+    width: auto !important;
     margin: 10px 12px 12px !important;
     padding: 12px 10px !important;
     background: #111111 !important;
