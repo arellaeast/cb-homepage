@@ -483,3 +483,23 @@ body.single-post .single-post-header .post_meta a {
         margin-top: 12px !important;
     }
 }
+
+/* Events calendar FIND EVENTS button: brand treatment, sharp corners + full 3D shadow (Jacob, 2026-11-12) */
+body .tribe-events .tribe-events-c-search__button,
+body .tribe-common .tribe-common-c-btn.tribe-events-c-search__button {
+    position: relative;
+    z-index: 2;
+    border-radius: 0 !important;
+    border: 3px solid #111111 !important;
+    background: #111111 !important;
+    color: #ffffff !important;
+    box-shadow: 5px 5px 0 #FF2E88 !important;
+    text-transform: uppercase;
+}
+body .tribe-events .tribe-events-c-search__button:hover,
+body .tribe-common .tribe-common-c-btn.tribe-events-c-search__button:hover {
+    box-shadow: 7px 7px 0 #FF2E88 !important;
+}
+body .tribe-events .tribe-events-c-events-bar {
+    padding-bottom: 10px;
+}
