@@ -250,3 +250,19 @@ body .cb-charts {
     font-weight: 700;
     line-height: 1.2;
 }
+
+/* Mobile menu close button: plain big black X, no gray circle (Jacob, 2026-11-12) */
+html .off-canvas .menu-close .close-button,
+html .off-canvas .menu-close .close-button span {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: #111111 !important;
+    font-size: 38px !important;
+    line-height: 1 !important;
+}
+html .off-canvas .menu-close .close-button {
+    width: 48px;
+    height: 48px;
+}
