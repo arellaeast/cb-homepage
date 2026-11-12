@@ -349,3 +349,117 @@ body.single-product button.single_add_to_cart_button.button.alt:hover,
 .woocommerce-account form.lost_reset_password button.button:hover {
     box-shadow: 7px 7px 0 #FF2E88 !important;
 }
+
+/* Single post pages: title decoupled from the featured image, Baltimore Beat style (Jacob, 2026-11-12).
+   Title and byline sit on white above; the featured image follows as its own block. */
+body.single-post .single-post-header {
+    display: flex !important;
+    flex-direction: column;
+    height: auto !important;
+    min-height: 0 !important;
+    background: #ffffff !important;
+    padding: 40px 0 34px;
+}
+body.single-post .single-post-header-overlay {
+    display: none !important;
+}
+body.single-post .single-post-header .row,
+body.single-post .single-post-header .row > div,
+body.single-post .single-post-header .title {
+    height: auto !important;
+    min-height: 0 !important;
+}
+body.single-post .single-post-header .row {
+    order: 1;
+    width: 100% !important;
+    max-width: 920px;
+    margin: 0 auto;
+}
+body.single-post .single-post-header .row > div {
+    width: 100% !important;
+    max-width: 920px;
+    float: none;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+body.single-post .single-post-header .title {
+    position: static;
+    transform: none;
+    text-align: left;
+    padding: 0;
+}
+body.single-post .single-post-header h1.entry-title {
+    color: #111111 !important;
+    font-size: 46px;
+    line-height: 1.05;
+    text-shadow: none !important;
+    margin: 0 0 14px;
+    text-align: left;
+}
+body.single-post .single-post-header .post_meta,
+body.single-post .single-post-header .post_meta a {
+    color: #666666 !important;
+    text-shadow: none !important;
+    text-align: left;
+}
+body.single-post .single-post-header .post_meta a {
+    color: #FF2E88 !important;
+}
+body.single-post .single-post-header-bkg {
+    order: 2;
+    position: relative !important;
+    top: auto; right: auto; bottom: auto; left: auto;
+    width: min(880px, calc(100% - 40px)) !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+    margin: 26px auto 0;
+    background-size: cover;
+    background-position: center;
+}
+@media (max-width: 680px) {
+    body.single-post .single-post-header { padding: 26px 0 24px; }
+    body.single-post .single-post-header h1.entry-title { font-size: 31px; }
+    body.single-post .single-post-header-bkg { aspect-ratio: 4 / 3; margin-top: 20px; }
+}
+
+/* Post header alignment pass: title block and image share one 880px column, byline tightened */
+body.single-post .single-post-header .title {
+    width: min(880px, calc(100% - 40px)) !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+body.single-post .single-post-header .post_meta {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    line-height: 1.5;
+}
+
+/* Post header: row and image in the exact same column */
+body.single-post .single-post-header .row {
+    width: min(880px, calc(100% - 40px)) !important;
+    max-width: none !important;
+}
+body.single-post .single-post-header .row > div {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: 0 !important;
+    float: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+body.single-post .single-post-header .title {
+    width: 100% !important;
+}
+
+/* Post header final pass: show the WHOLE featured image (no crop), and force the title column wide (Jacob, 2026-11-12) */
+body.single-post .single-post-header-bkg {
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+}
+body.single-post .single-post-header .row > div {
+    flex: 0 0 100% !important;
+}
