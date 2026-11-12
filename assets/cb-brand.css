@@ -295,3 +295,11 @@ body.woocommerce-cart .cart-empty {
     font-size: 24px;
     padding-bottom: 26px;
 }
+
+/* Search panel: the submit input is an invisible tap target over the theme's magnifier icon; the brand button border turned it into an empty square (Jacob, 2026-11-12) */
+.site-search .search-form input[type="submit"] {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+}
