@@ -38,7 +38,7 @@
     align-items: end;
     gap: 8px 20px;
     margin-bottom: 22px;
-    border-bottom: 3px solid var(--cb-ink);
+    border-bottom: 3px dashed var(--cb-ink);
     padding-bottom: 12px;
 }
 .cb-sec-head .cb-kicker { flex-basis: 100%; }
@@ -74,7 +74,7 @@
     max-width: 1180px;
     margin: 0 auto;
     text-align: left;
-    border-bottom: 4px solid var(--cb-ink);
+    border-bottom: 4px dashed var(--cb-ink);
 }
 .cb-hero-title {
     margin: 0 0 14px;
