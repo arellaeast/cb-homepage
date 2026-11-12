@@ -303,3 +303,17 @@ body.woocommerce-cart .cart-empty {
     background: transparent !important;
     border-radius: 0 !important;
 }
+
+/* Shop grid on phones: one big card per row (Jacob's pick, 2026-11-12), and pull the wishlist heart in from the card edge where it was clipped */
+@media (max-width: 680px) {
+    .woocommerce ul.products li.product {
+        width: 100% !important;
+        float: none !important;
+        clear: both;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+.woocommerce ul.products li.product .product_thumbnail_icons {
+    right: 12px !important;
+}
