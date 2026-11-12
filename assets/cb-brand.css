@@ -283,3 +283,15 @@ body.woocommerce-cart .cart-empty.woocommerce-info {
     display: block !important;
     text-align: center;
 }
+
+/* Empty-cart icon: the theme renders it at 128px where it swamps the box and overlaps the button; size it down and center it (Jacob, 2026-11-12) */
+body.woocommerce-cart .cart-empty:before {
+    font-size: 68px !important;
+    line-height: 1.1 !important;
+    text-align: center;
+    margin: 6px auto 4px;
+}
+body.woocommerce-cart .cart-empty {
+    font-size: 24px;
+    padding-bottom: 26px;
+}
