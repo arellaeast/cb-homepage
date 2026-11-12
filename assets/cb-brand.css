@@ -503,3 +503,97 @@ body .tribe-common .tribe-common-c-btn.tribe-events-c-search__button:hover {
 body .tribe-events .tribe-events-c-events-bar {
     padding-bottom: 10px;
 }
+
+/* Cart flow buttons: brand treatment (Jacob, 2026-11-12: "fix her buttons") - sharp corners everywhere, checkout is the hero button, apply coupon fits its label, view cart is a black chip on the pink notice */
+body .wc-proceed-to-checkout a.checkout-button,
+body.woocommerce-cart .checkout-button,
+body.woocommerce-checkout .checkout-button {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border: 3px solid #111111 !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 0 #FF2E88 !important;
+    text-transform: uppercase;
+}
+body .wc-proceed-to-checkout a.checkout-button:hover {
+    box-shadow: 7px 7px 0 #FF2E88 !important;
+}
+body .woocommerce .return-to-shop a.button,
+body .woocommerce a.button.continue-shopping,
+body .woocommerce-cart a.continue,
+body .woocommerce .cart-collaterals a.button {
+    border-radius: 0 !important;
+}
+body .woocommerce .woocommerce-message a.button,
+body .woocommerce .woocommerce-info a.button {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border: 3px solid #111111 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
+body .woocommerce-cart .coupon button.button,
+body .woocommerce-cart .coupon input[name="apply_coupon"],
+body .woocommerce .coupon .button {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border: 3px solid #111111 !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 0 #FF2E88 !important;
+    white-space: nowrap;
+    width: auto !important;
+    min-width: 170px;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    text-transform: uppercase;
+}
+body .woocommerce-cart button[name="update_cart"] {
+    border-radius: 0 !important;
+    border: 3px solid #111111 !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
+
+/* Cart buttons round 2: the two the first pass missed, by their real classes */
+.shopkeeper-continue-shopping a.button {
+    border-radius: 0 !important;
+    border: 3px solid #111111 !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
+.woocommerce-mini-cart__buttons a.button {
+    border-radius: 0 !important;
+    border: 3px solid #111111 !important;
+    background: #111111 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
+
+/* Mini-cart buttons, heavy selector: the theme paints them with the accent color and rounds them (Jacob, 2026-11-12) */
+html body .widget_shopping_cart .woocommerce-mini-cart__buttons a.button.wc-forward,
+html body .widget_shopping_cart .woocommerce-mini-cart__buttons a.button.checkout {
+    border-radius: 0 !important;
+    border: 3px solid #111111 !important;
+    background: #111111 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
+
+/* The VISIBLE added-to-cart notice is the theme's custom notification (gbt-custom-notification), plus the standard Woo notice button (Jacob, 2026-11-12) */
+html body .gbt-custom-notification-message a.button,
+html body .woocommerce-message a.button.wc-forward,
+html body .woocommerce-info a.button.wc-forward {
+    border-radius: 0 !important;
+    border: 3px solid #111111 !important;
+    background: #111111 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
