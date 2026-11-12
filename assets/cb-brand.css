@@ -330,3 +330,22 @@ body.woocommerce-cart .cart-empty {
     border: none !important;
     box-shadow: none !important;
 }
+
+/* Single product Add to Cart: brand treatment like the hero buttons - black, sharp corners, hard pink offset shadow (Jacob, 2026-11-12) */
+body.single-product button.single_add_to_cart_button.button.alt,
+.woocommerce-account form.login button.button,
+.woocommerce-account form.register button.button,
+.woocommerce-account form.lost_reset_password button.button {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border: 3px solid #111111 !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 0 #FF2E88 !important;
+    text-transform: uppercase;
+}
+body.single-product button.single_add_to_cart_button.button.alt:hover,
+.woocommerce-account form.login button.button:hover,
+.woocommerce-account form.register button.button:hover,
+.woocommerce-account form.lost_reset_password button.button:hover {
+    box-shadow: 7px 7px 0 #FF2E88 !important;
+}
