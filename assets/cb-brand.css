@@ -239,7 +239,9 @@ body .cb-charts {
     height: auto !important;
 }
 .woocommerce ul.products li.product .product_after_shop_loop_switcher a.button {
-    display: block !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
     width: auto !important;
     margin: 10px 12px 12px !important;
     padding: 12px 10px !important;
