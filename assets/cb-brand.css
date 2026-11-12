@@ -320,3 +320,13 @@ body.woocommerce-cart .cart-empty {
 .woocommerce ul.products li.product .product_thumbnail_icons {
     right: 12px !important;
 }
+
+/* Product detail pages: no borders around the gallery images, main or thumbnails (Jacob, 2026-11-12) */
+.single-product .woocommerce-product-gallery,
+.single-product .woocommerce-product-gallery figure,
+.single-product .woocommerce-product-gallery .flex-viewport,
+.single-product .woocommerce-product-gallery img,
+.single-product .flex-control-thumbs li {
+    border: none !important;
+    box-shadow: none !important;
+}
