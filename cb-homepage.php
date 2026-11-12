@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.51
+ * Version: 1.2.52
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.51' );
+define( 'CB_HOME_VERSION', '1.2.52' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -314,6 +314,52 @@ add_shortcode( 'cb_home', function () {
                 echo '<p class="cb-home-note">Nothing on the calendar yet — <a href="' . esc_url( home_url( '/events/' ) ) . '">check the full calendar</a>.</p>';
             }
             wp_reset_postdata();
+            ?>
+            </div>
+        </section>
+
+        <!-- VENUE HOT SPOTS: the four rooms with the most shows coming up -->
+        <section class="cb-sec cb-sec--venues" aria-labelledby="cb-venues">
+            <?php echo cb_home_section_head( 'cb-venues', 'Hot spots', 'Where the city goes out', home_url( '/venues/' ), 'All venues' ); ?>
+            <div class="cb-grid">
+            <?php
+            global $wpdb;
+            $spots = $wpdb->get_results( $wpdb->prepare(
+                "SELECT pm.meta_value AS venue_id, COUNT(*) AS n, MIN(pm2.meta_value) AS next_start
+                 FROM {$wpdb->postmeta} pm
+                 JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND p.post_type = 'tribe_events' AND p.post_status = 'publish'
+                 JOIN {$wpdb->postmeta} pm2 ON pm2.post_id = p.ID AND pm2.meta_key = '_EventStartDate'
+                 WHERE pm.meta_key = '_EventVenueID' AND pm2.meta_value >= %s
+                 GROUP BY pm.meta_value ORDER BY n DESC, next_start ASC LIMIT 4",
+                current_time( 'mysql' )
+            ) );
+            $palette = array( '#FF2E88', '#7B2FFF', '#00C2E8', '#7ED321' );
+            $rank    = 0;
+            foreach ( (array) $spots as $spot ) {
+                $vid   = (int) $spot->venue_id;
+                $vpost = get_post( $vid );
+                if ( ! $vpost || 'publish' !== $vpost->post_status ) {
+                    continue;
+                }
+                $meta = (int) $spot->n . ( 1 === (int) $spot->n ? ' show' : ' shows' ) . ' coming up';
+                if ( $spot->next_start ) {
+                    $meta .= ' · Next ' . date_i18n( 'M j', strtotime( $spot->next_start ) );
+                }
+                $img = get_the_post_thumbnail_url( $vid, 'medium_large' );
+                if ( $img ) {
+                    echo cb_home_card( get_permalink( $vid ), $img, $vpost->post_title, $meta );
+                } else {
+                    $color = $palette[ $rank % count( $palette ) ];
+                    echo '<a class="cb-card" href="' . esc_url( get_permalink( $vid ) ) . '">'
+                        . '<span class="cb-card__img" style="background:' . esc_attr( $color ) . '"><span class="cb-spot__initial">' . esc_html( strtoupper( $vpost->post_title[0] ) ) . '</span></span>'
+                        . '<span class="cb-card__body"><span class="cb-card__title">' . esc_html( $vpost->post_title ) . '</span>'
+                        . '<span class="cb-card__meta">' . esc_html( $meta ) . '</span></span></a>';
+                }
+                $rank++;
+            }
+            if ( ! $spots ) {
+                echo '<p class="cb-home-note">Venue hot spots are warming up — <a href="' . esc_url( home_url( '/venues/' ) ) . '">browse all venues</a>.</p>';
+            }
             ?>
             </div>
         </section>
