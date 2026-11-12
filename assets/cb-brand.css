@@ -282,6 +282,8 @@ body.woocommerce-cart .return-to-shop a.button.wc-backward {
 body.woocommerce-cart .cart-empty.woocommerce-info {
     display: block !important;
     text-align: center;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
 }
 
 /* Empty-cart icon: removed entirely, it hung crooked out of the message box (Jacob, 2026-11-12) */
