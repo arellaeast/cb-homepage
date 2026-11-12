@@ -266,3 +266,20 @@ html .off-canvas .menu-close .close-button {
     width: 48px;
     height: 48px;
 }
+
+/* Cart page: Return to shop was a bare pink label overflowing a pill outline; make it a real brand button. The theme also hides the empty-cart message entirely; show it (Jacob, 2026-11-12) */
+.return-to-shop { text-align: center; }
+body.woocommerce-cart .return-to-shop a.button.wc-backward {
+    display: inline-block !important;
+    padding: 13px 28px !important;
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border-radius: 0 !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    text-align: center;
+}
+body.woocommerce-cart .cart-empty.woocommerce-info {
+    display: block !important;
+    text-align: center;
+}
