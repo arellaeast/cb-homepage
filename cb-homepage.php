@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.53
+ * Version: 1.2.54
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.53' );
+define( 'CB_HOME_VERSION', '1.2.54' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -223,6 +223,21 @@ function cb_home_card( $url, $img, $title, $meta = '' ) {
     }
     $out .= '</span></a>';
     return $out;
+}
+
+/* "The Heat" panel (v1.2.54): brands the twice-daily Spotlight Hours under
+ * their public name and points artists at the Fair Play page. Identical
+ * block to the one the cb-pirate-radio plugin appends after the chart on
+ * /radio/ — same cream panel, same copy — so the feature reads the same
+ * everywhere it appears. */
+function cb_home_heat_block() {
+    $url = esc_url( home_url( '/radio/fair-play/' ) );
+    return '<div class="cb-heat" style="background:#fffdf4;border:3px solid #111111;box-shadow:6px 6px 0 #111111;padding:34px 30px;max-width:860px;margin:26px auto 0;">'
+        . '<p style="margin:0 0 8px;font-family:\'Poppins\',sans-serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:#ff2e88;">For Artists</p>'
+        . '<h2 style="margin:0 0 14px;font-family:\'Poppins\',sans-serif;font-weight:800;font-size:30px;line-height:1.05;text-transform:uppercase;color:#111111;">The Heat</h2>'
+        . '<p style="margin:0 0 24px;font-size:17px;line-height:1.6;color:#111111;">Pirate Radio plays Baltimore artists, and twice a day every music station drops the shuffle and plays its hottest songs back to back, about 10 to 20 songs in the hour. That is The Heat. It runs every day, from 9 to 10 in the morning and 9 to 10 at night. The seats are counted, not picked: most of them are earned by songs that hold their listeners, and they are re-earned every week. The rest rotate in daily, longest waiting first, so every artist in the pool gets a turn in the hot hour. Every count comes from the plays the stations actually logged. No favorites. No pay to play.</p>'
+        . '<p style="margin:0;"><a href="' . $url . '" style="display:inline-block;font-family:\'Poppins\',sans-serif;font-weight:700;color:#ffffff;background:#111111;border:3px solid #111111;padding:13px 26px;box-shadow:4px 4px 0 #ff2e88;text-decoration:none;">See How The Heat Works</a></p>'
+        . '</div>';
 }
 
 function cb_home_section_head( $id, $kicker, $title, $all_url, $all_label ) {
@@ -592,6 +607,7 @@ add_shortcode( 'cb_home', function () {
             })();
             </script>
             <p class="cb-radio-note">Every channel, live from the homepage. The <a href="<?php echo esc_url( home_url( '/radio/' ) ); ?>">full deck</a> has votes, the Top 10, and recently played.</p>
+            <?php echo cb_home_heat_block(); ?>
         </section>
 
         <!-- SHOP -->
