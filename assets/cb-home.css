@@ -199,7 +199,7 @@ body.home .entry-header { display: none; }
     .cb-hd-eq i, .cb-hdeck.is-playing .cb-hd-beacon { animation: none; }
     .cb-hd-progress > div { transition: none; }
 }
-.cb-radio-note { color: #ccc; margin-top: 28px; }
+.cb-radio-note { color: #ccc; margin-top: 28px; text-align: center; }
 .cb-radio-note a { color: var(--cb-cyan); text-decoration: underline; }
 
 /* Newsletter */
