@@ -597,3 +597,14 @@ html body .woocommerce-info a.button.wc-forward {
     box-shadow: none !important;
     text-transform: uppercase;
 }
+
+/* Events calendar chrome cleanup (Jacob, 2026-11-13): list view is forced sitewide
+   (/events/month/ redirects to list), so the lone "List" view switcher next to
+   FIND EVENTS is pointless — hide it. Same for the "Subscribe to calendar"
+   dropdown at the bottom of the events list. The FIND EVENTS button, the search
+   bar, and the Next Events pagination link are untouched. */
+.tribe-events .tribe-events-c-view-selector,
+.tribe-events .tribe-events-c-subscribe-dropdown__container,
+.tribe-events .tribe-events-c-subscribe-dropdown {
+    display: none !important;
+}
