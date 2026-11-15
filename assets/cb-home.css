@@ -127,6 +127,10 @@
 .cb-sec--events .cb-card__img img { object-fit: contain; }
 /* Venue hot spots: colored initial panel where a venue has no photo */
 .cb-spot__initial { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-family: "Poppins", sans-serif; font-weight: 800; font-size: 72px; color: #fff; text-shadow: 4px 4px 0 var(--cb-ink); }
+/* Venue hot spots: real venue logo centered on its own brand background
+   (inline style), so the logo blends into the panel (Jacob, 2026-11-15) */
+.cb-card__img.cb-card__img--logo { display: flex; align-items: center; justify-content: center; }
+.cb-card__img.cb-card__img--logo img { width: auto; height: auto; max-width: 84%; max-height: 82%; object-fit: contain; }
 .cb-card__body { display: block; padding: 16px; }
 .cb-card__title { display: block; font-weight: 700; font-size: 17px; line-height: 1.3; }
 .cb-card__meta { display: block; margin-top: 6px; font-size: 13px; color: #555; }

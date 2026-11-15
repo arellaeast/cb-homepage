@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.55
+ * Version: 1.2.56
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.55' );
+define( 'CB_HOME_VERSION', '1.2.56' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -361,7 +361,18 @@ add_shortcode( 'cb_home', function () {
                     $meta .= ' · Next ' . date_i18n( 'M j', strtotime( $spot->next_start ) );
                 }
                 $img = get_the_post_thumbnail_url( $vid, 'medium_large' );
-                if ( $img ) {
+                // Venue logo (cb-venue-pages meta): the venue's real logo
+                // centered on its own brand background, so it blends into
+                // the block. Wins over the featured photo and letter tile.
+                $logo_id  = (int) get_post_meta( $vid, 'cb_logo_id', true );
+                $logo_bg  = (string) get_post_meta( $vid, 'cb_logo_bg', true );
+                $logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'medium_large' ) : '';
+                if ( $logo_url && preg_match( '/^#[0-9a-fA-F]{6}$/', $logo_bg ) ) {
+                    echo '<a class="cb-card" href="' . esc_url( get_permalink( $vid ) ) . '">'
+                        . '<span class="cb-card__img cb-card__img--logo" style="background:' . esc_attr( $logo_bg ) . '"><img src="' . esc_url( $logo_url ) . '" alt="" loading="lazy" /></span>'
+                        . '<span class="cb-card__body"><span class="cb-card__title">' . esc_html( $vpost->post_title ) . '</span>'
+                        . '<span class="cb-card__meta">' . esc_html( $meta ) . '</span></span></a>';
+                } elseif ( $img ) {
                     echo cb_home_card( get_permalink( $vid ), $img, $vpost->post_title, $meta );
                 } else {
                     $color = $palette[ $rank % count( $palette ) ];
@@ -391,7 +402,7 @@ add_shortcode( 'cb_home', function () {
                 <div class="cb-hd-cards" role="group" aria-label="Channels">
                     <button type="button" class="cb-hd-card" data-slug="drill" style="--acc:#FF2E88" aria-pressed="false">
                         <span class="cb-hd-freq">87.90<small> FM</small></span>
-                        <span class="cb-hd-name">Drill</span>
+                        <span class="cb-hd-name">Drill and Trap</span>
                         <span class="cb-hd-track" data-track>—</span>
                         <span class="cb-hd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
                     </button>
