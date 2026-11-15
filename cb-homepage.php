@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.57
+ * Version: 1.2.58
  * Author: Captain Baltimore
  */
 
@@ -653,13 +653,13 @@ add_shortcode( 'cb_home', function () {
 
         <!-- GAMES -->
         <section class="cb-sec cb-sec--games" aria-labelledby="cb-games">
-            <?php echo cb_home_section_head( 'cb-games', 'Play time', 'Games', home_url( '/street-empire/' ), 'Play Crabs in a Barrel' ); ?>
+            <?php echo cb_home_section_head( 'cb-games', 'Play time', 'Games', 'https://crabs.captainbaltimore.com', 'Play Crabs in a Barrel' ); ?>
             <div class="cb-grid cb-grid--3">
-                <a class="cb-card cb-card--game" href="<?php echo esc_url( home_url( '/street-empire/' ) ); ?>">
+                <a class="cb-card cb-card--game" href="https://crabs.captainbaltimore.com">
                     <span class="cb-card__body"><span class="cb-card__title">Crabs in a Barrel</span>
                     <span class="cb-card__meta">Our Baltimore street game — climb the leaderboard.</span></span>
                 </a>
-                <a class="cb-card cb-card--game" href="<?php echo esc_url( home_url( '/dice-101/' ) ); ?>">
+                <a class="cb-card cb-card--game" href="https://dice.captainbaltimore.com">
                     <span class="cb-card__body"><span class="cb-card__title">Dice 101</span>
                     <span class="cb-card__meta">Learn the game, then roll with the crew.</span></span>
                 </a>
