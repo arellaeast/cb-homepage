@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.56
+ * Version: 1.2.57
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.56' );
+define( 'CB_HOME_VERSION', '1.2.57' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -653,7 +653,7 @@ add_shortcode( 'cb_home', function () {
 
         <!-- GAMES -->
         <section class="cb-sec cb-sec--games" aria-labelledby="cb-games">
-            <?php echo cb_home_section_head( 'cb-games', 'Play time', 'Fun &amp; Games', home_url( '/street-empire/' ), 'Play Crabs in a Barrel' ); ?>
+            <?php echo cb_home_section_head( 'cb-games', 'Play time', 'Games', home_url( '/street-empire/' ), 'Play Crabs in a Barrel' ); ?>
             <div class="cb-grid cb-grid--3">
                 <a class="cb-card cb-card--game" href="<?php echo esc_url( home_url( '/street-empire/' ) ); ?>">
                     <span class="cb-card__body"><span class="cb-card__title">Crabs in a Barrel</span>
