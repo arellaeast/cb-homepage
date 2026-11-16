@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.58
+ * Version: 1.2.59
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.57' );
+define( 'CB_HOME_VERSION', '1.2.59' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -407,13 +407,13 @@ add_shortcode( 'cb_home', function () {
                         <span class="cb-hd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
                     </button>
                     <button type="button" class="cb-hd-card" data-slug="hip-hop-and-r-and-b" style="--acc:#7B2FFF" aria-pressed="false">
-                        <span class="cb-hd-freq">90.10<small> FM</small></span>
+                        <span class="cb-hd-freq">92.10<small> FM</small></span>
                         <span class="cb-hd-name">Hip-Hop and R&amp;B</span>
                         <span class="cb-hd-track" data-track>—</span>
                         <span class="cb-hd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
                     </button>
                     <button type="button" class="cb-hd-card" data-slug="bmore-club2" style="--acc:#00C2E8" aria-pressed="false">
-                        <span class="cb-hd-freq">92.30<small> FM</small></span>
+                        <span class="cb-hd-freq">93.30<small> FM</small></span>
                         <span class="cb-hd-name">Rock, Punk and Alternative</span>
                         <span class="cb-hd-track" data-track>—</span>
                         <span class="cb-hd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
@@ -426,7 +426,7 @@ add_shortcode( 'cb_home', function () {
                     </button>
                 </div>
                 <div class="cb-hd-main">
-                    <div class="cb-hd-artwrap"><img data-art alt="" hidden><span class="cb-hd-artfb" data-artfb>&#127988;&#8205;&#9760;&#65039;</span></div>
+                    <div class="cb-hd-artwrap"><img data-art alt="" hidden><span class="cb-hd-artfb" data-artfb><img src="<?php echo esc_url( plugins_url( 'assets/pirate-flag-default.jpg', __FILE__ ) ); ?>" alt=""></span></div>
                     <div class="cb-hd-info">
                         <span class="cb-hd-live" data-live>ON AIR</span>
                         <p class="cb-hd-title" data-title>Tuning&hellip;</p>
