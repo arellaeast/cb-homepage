@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.61
+ * Version: 1.2.62
  * Author: Captain Baltimore
  */
 
@@ -10,13 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.60' );
+define( 'CB_HOME_VERSION', '1.2.62' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
     if ( is_singular() ) {
         global $post;
-        if ( $post && has_shortcode( $post->post_content, 'cb_home' ) ) {
+        if ( $post && ( has_shortcode( $post->post_content, 'cb_home' ) || has_shortcode( $post->post_content, 'cb_travel_deals' ) ) ) {
             wp_enqueue_style(
                 'cb-home',
                 plugins_url( 'assets/cb-home.css', __FILE__ ),
