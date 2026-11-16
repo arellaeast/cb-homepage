@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.60
+ * Version: 1.2.61
  * Author: Captain Baltimore
  */
 
@@ -202,6 +202,43 @@ add_shortcode( 'cb_join', function () {
         <h2 class="cb-joinband__title">Get the daily guide in your inbox</h2>
         <a class="cb-joinband__btn" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Read the latest news &rarr;</a>
         <?php echo cb_home_newsletter_form(); ?>
+    </div>
+    <?php
+    return ob_get_clean();
+} );
+
+/* Travel deals hub ([cb_travel_deals]) — powers the /travel-deals/ page the
+ * homepage "All travel deals" button points at. Lists every published post
+ * in the Travel Deals category (123), newest first, in the same card grid
+ * as the homepage strip, so the hub stays current on its own each week. */
+add_shortcode( 'cb_travel_deals', function () {
+    $deals = new WP_Query( array(
+        'cat'            => 123,
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+    ) );
+    ob_start();
+    ?>
+    <div class="cb-home">
+        <p class="cb-home-note">Every week we round up the cheapest flights out of BWI and cruises out of the Port of Baltimore. New deals land every Monday.</p>
+        <div class="cb-grid">
+        <?php
+        if ( $deals->have_posts() ) {
+            while ( $deals->have_posts() ) {
+                $deals->the_post();
+                echo cb_home_card(
+                    get_permalink(),
+                    get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ),
+                    get_the_title(),
+                    get_the_date()
+                );
+            }
+        } else {
+            echo '<p class="cb-home-note">No travel deals yet. Check back Monday.</p>';
+        }
+        wp_reset_postdata();
+        ?>
+        </div>
     </div>
     <?php
     return ob_get_clean();
