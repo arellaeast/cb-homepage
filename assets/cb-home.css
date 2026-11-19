@@ -100,7 +100,7 @@
     padding: 13px 26px;
     box-shadow: 4px 4px 0 var(--cb-pink);
 }
-.cb-btn:hover { background: var(--cb-pink); box-shadow: 4px 4px 0 var(--cb-ink); }
+.cb-btn:hover { background: var(--cb-pink); color: #fff; box-shadow: 4px 4px 0 var(--cb-ink); }
 .cb-btn--ghost { background: #fff; color: var(--cb-ink); box-shadow: 4px 4px 0 var(--cb-cyan); }
 .cb-btn--ghost:hover { background: var(--cb-cyan); color: #fff; }
 
