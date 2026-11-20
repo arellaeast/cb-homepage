@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Captain Baltimore Homepage
  * Description: New captainbaltimore.com homepage (no Elementor): hero, news, events, pirate radio, shop, games, travel deals, newsletter. Use with the [cb_home] shortcode. v1.1 adds the sitewide brand stylesheet (cb-brand.css). v1.2 adds the Pirate Radio tuner re-skin (in cb-brand.css) and a custom homepage radio player.
- * Version: 1.2.65
+ * Version: 1.2.66
  * Author: Captain Baltimore
  */
 
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CB_HOME_VERSION', '1.2.65' );
+define( 'CB_HOME_VERSION', '1.2.66' );
 
 /* Enqueue the stylesheet only on pages that use the shortcode. */
 add_action( 'wp_enqueue_scripts', function () {
@@ -449,7 +449,7 @@ add_shortcode( 'cb_home', function () {
                         <span class="cb-hd-track" data-track>—</span>
                         <span class="cb-hd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
                     </button>
-                    <button type="button" class="cb-hd-card" data-slug="bmore-club2" style="--acc:#00C2E8" aria-pressed="false">
+                    <button type="button" class="cb-hd-card" data-slug="pop-rock-and-alternative" style="--acc:#00C2E8" aria-pressed="false">
                         <span class="cb-hd-freq">93.30<small> FM</small></span>
                         <span class="cb-hd-name">Rock, Punk and Alternative</span>
                         <span class="cb-hd-track" data-track>—</span>
@@ -488,9 +488,9 @@ add_shortcode( 'cb_home', function () {
                 var root = document.getElementById('cb-hdeck');
                 if (!root) return;
                 var CHANNELS = [
-                    { slug: 'drill', stream: 'https://radio.captainbaltimore.com/listen/local_baltimore_hip_hop_and_rb/radio.mp3' },
+                    { slug: 'drill', stream: 'https://radio.captainbaltimore.com/listen/captainbaltimore/radio.mp3' },
                     { slug: 'hip-hop-and-r-and-b', stream: 'https://radio.captainbaltimore.com/listen/local_baltimore_hip_hop_and_rb/radio.mp3' },
-                    { slug: 'bmore-club2', stream: 'https://radio.captainbaltimore.com/listen/captainbaltimore/radio.mp3' },
+                    { slug: 'pop-rock-and-alternative', stream: 'https://radio.captainbaltimore.com/listen/local_baltimore_pop_rock_and_alternative/radio.mp3' },
                     { slug: 'dock-talk', stream: 'https://radio.captainbaltimore.com/listen/dock_talk/radio.mp3' }
                 ];
                 var ICON_PLAY = '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg>';
@@ -503,7 +503,12 @@ add_shortcode( 'cb_home', function () {
                 function q(sel){ return root.querySelector(sel); }
                 var audio = q('[data-audio]'), playBtn = q('[data-play]');
                 var cards = {}; root.querySelectorAll('.cb-hd-card').forEach(function(c){ cards[c.dataset.slug] = c; });
-                var state = { data: {}, slug: lsGet('cbdChannel') || 'drill', playing: false, fetchedAt: 0 };
+                // v1.2.66: the 93.30 card's slug was 'bmore-club2' until the
+                // wiring fix; migrate any saved channel so returning Rock
+                // listeners land on the real card instead of the default.
+                var savedSlug = lsGet('cbdChannel');
+                if (savedSlug === 'bmore-club2') { savedSlug = 'pop-rock-and-alternative'; lsSet('cbdChannel', savedSlug); }
+                var state = { data: {}, slug: savedSlug || 'drill', playing: false, fetchedAt: 0 };
                 if (!cards[state.slug]) state.slug = 'drill';
                 function streamFor(slug){ var d = state.data[slug]; if (d && d.stream) return d.stream; for (var i=0;i<CHANNELS.length;i++) if (CHANNELS[i].slug===slug) return CHANNELS[i].stream; return ''; }
                 function idx(slug){ for (var i=0;i<CHANNELS.length;i++) if (CHANNELS[i].slug===slug) return i; return 0; }
