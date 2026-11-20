@@ -198,6 +198,8 @@ body.home .entry-header { display: none; }
     .cb-hd-main { flex-direction: column; align-items: stretch; }
     .cb-hd-artwrap { width: 100%; height: auto; aspect-ratio: 1 / 1; }
     .cb-hd-title { font-size: 22px; }
+    .cb-hd-transport { justify-content: center; }
+    .cb-hd-vol { margin-left: 0; flex: 0 1 220px; }
 }
 @media (prefers-reduced-motion: reduce) {
     .cb-hd-eq i, .cb-hdeck.is-playing .cb-hd-beacon { animation: none; }
